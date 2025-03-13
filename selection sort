@@ -1,0 +1,16 @@
+void selectionSort(int a[], int n) {
+    int i = 0;
+    while (i < n - 1) {
+        int min = i;
+        int j = i + 1;
+        while (j < n) {
+            comparisonCount++; // Đếm số phép so sánh
+            if (a[j] < a[min]) {
+                min = j;
+            }
+            j++;
+        }
+        swap(a[i], a[min]);
+        i++;
+    }
+}
