@@ -319,6 +319,62 @@ void shakerSort(int arr[], int n)
 	}
 }
 
+void selectionSort(int a[], int n) {
+	int comparisonCount = 0;
+	for (int i = 0; i < n -1 ; i++) {
+		int min = i;
+		for (int j = 1 +i; j < n ; j++) {
+			comparisonCount++;
+			if (a[j] < a[min]) {
+				min = j;
+			}
+		}
+		swap(a[i], a[min]);
+	}
+
+}
+
+void countingSort(int a[], int n) {
+
+	int maxVal = a[0];
+	int comparisonCount = 0;
+	for (int i = 1; i < n; i++) {
+		comparisonCount++;
+		if (a[i] > maxVal) {
+			maxVal = a[i];
+		}
+	}
+
+	int size = maxVal + 1;
+	int* output = new int[n];
+	int* count = new int[size];
+
+	for (int i = 0; i < size; i++) {
+		count[i] = 0;
+	}
+
+	for (int i = 0; i < n; i++) {
+		count[a[i]]++;
+	}
+
+	for (int i = 1; i < size; i++) {
+		comparisonCount++;
+		count[i] += count[i - 1];
+	}
+
+	for (int i = n - 1; i >= 0; i--) {
+		output[count[a[i]] - 1] = a[i];
+		count[a[i]]--;
+	}
+
+	for (int i = 0; i < n; i++) {
+		a[i] = output[i];
+	}
+
+	delete[] count;
+	delete[] output;
+}
+
 
 void readFile(const string &filename, int*& arr, int&n) {
     fstream fin(filename);
