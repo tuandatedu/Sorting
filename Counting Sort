@@ -1,0 +1,58 @@
+
+void countingSort(int a[], int n) {
+    int maxVal = a[0];
+    int i = 1;
+
+    // Tìm giá trị lớn nhất trong mảng
+    while (i < n) {
+        comparisonCount++;
+        if (a[i] > maxVal) {
+            maxVal = a[i];
+        }
+        i++;
+    }
+
+    int size = maxVal + 1;
+    int* output = new int[n];
+    int* count = new int[size];
+
+    // Khởi tạo mảng đếm
+    i = 0;
+    while (i < size) {
+        count[i] = 0;
+        i++;
+    }
+
+    // Đếm số lần xuất hiện của mỗi phần tử
+    i = 0;
+    while (i < n) {
+        count[a[i]]++;
+        i++;
+    }
+
+    // Tính tổng tích lũy
+    i = 1;
+    while (i < size) {
+        comparisonCount++;
+        count[i] += count[i - 1];
+        i++;
+    }
+
+    // Sắp xếp phần tử vào mảng đầu ra
+    i = n - 1;
+    while (i >= 0) {
+        output[count[a[i]] - 1] = a[i];
+        count[a[i]]--;
+        i--;
+    }
+
+    // Sao chép kết quả vào mảng ban đầu
+    i = 0;
+    while (i < n) {
+        a[i] = output[i];
+        i++;
+    }
+
+    delete[] count;
+    delete[] output;
+}
