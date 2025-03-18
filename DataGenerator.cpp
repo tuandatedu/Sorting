@@ -314,23 +314,20 @@ void mergeSort(int a[], int n) {
 
 // Selection sort algorithm
 void selectionSort(int a[], int n) {
-	for (int i = 0; i < n - 1 ; i++) {
+	for (int i = 0; ++comparisonCount && i < n - 1; i++) {
 		comparisonCount++;
 		int min = i;
 
-		for (int j = 1 + i; j < n ; j++) {
-			comparisonCount += 2;
+		for (int j = 1 + i; ++comparisonCount && j < n; j++) {
+			comparisonCount += 1;
 			if (a[j] < a[min]) {
 				min = j;
 			}
 		}
-		comparisonCount++;
 
 		HoanVi(a[i], a[min]);
 	}
-	comparisonCount++;
 }
-
 // Counting sort algorithm
 void countingSort(int a[], int n) {
 	int maxVal = a[0];
